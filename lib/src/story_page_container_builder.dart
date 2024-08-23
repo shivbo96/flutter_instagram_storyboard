@@ -31,6 +31,7 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
   double _totalWidth = 0.0;
   double _pageWidth = 0.0;
   bool _isClosed = false;
+  int lateCurrentIndex = 0;
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page!.floor();
+        lateCurrentIndex = _curPageIndex;
         _pageDelta = _pageController.page! - _currentPage;
         final isFirst = _currentPage == 0;
         final isLast =
@@ -231,6 +233,7 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
                         buttonData: buttonData,
                         onClosePressed: _close,
                         pageController: _pageController,
+                        currentIndex: lateCurrentIndex,
                         onStoryComplete: _onStoryComplete,
                       );
                       return _storyPageTransform.transform(

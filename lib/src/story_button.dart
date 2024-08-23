@@ -120,21 +120,18 @@ class _StoryButtonState extends State<StoryButton>
         AspectRatio(
           aspectRatio: widget.buttonData.aspectRatio,
           child: Container(
-            decoration: widget.buttonData._isWatched
-                ? null
-                : widget.buttonData.borderDecoration,
+            decoration: widget.buttonData._isWatched ? null : widget.buttonData.borderDecoration,
             child: Padding(
               padding: EdgeInsets.all(
                 widget.buttonData.borderOffset,
               ),
               child: ClipRRect(
-                borderRadius:
-                    widget.buttonData.buttonDecoration.borderRadius?.resolve(
-                          null,
-                        ) ??
-                        const BorderRadius.all(
-                          Radius.circular(12.0),
-                        ),
+                borderRadius: widget.buttonData.buttonDecoration.borderRadius?.resolve(
+                      null,
+                    ) ??
+                    const BorderRadius.all(
+                      Radius.circular(12.0),
+                    ),
                 child: Stack(
                   children: [
                     Container(
@@ -145,8 +142,7 @@ class _StoryButtonState extends State<StoryButton>
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        splashFactory: widget.buttonData.inkFeatureFactory ??
-                            InkRipple.splashFactory,
+                        splashFactory: widget.buttonData.inkFeatureFactory ?? InkRipple.splashFactory,
                         onTap: _onTap,
                         child: const SizedBox(
                           width: double.infinity,
@@ -212,7 +208,7 @@ class StoryButtonData {
   final Widget child;
   final List<Widget> storyPages;
   final Widget? closeButton;
-  final Duration segmentDuration;
+  final List<Duration> segmentDuration;
   final BoxDecoration containerBackgroundDecoration;
   final Color timelineFillColor;
   final Color timelineBackgroundColor;
@@ -287,8 +283,8 @@ class StoryButtonData {
     ),
     this.borderOffset = 2.0,
   }) : assert(
-          segmentDuration.inMilliseconds % kStoryTimerTickMillis == 0 &&
-              segmentDuration.inMilliseconds >= 1000,
+          segmentDuration.first.inMilliseconds % kStoryTimerTickMillis == 0 &&
+              segmentDuration.first.inMilliseconds >= 1000,
           'Segment duration in milliseconds must be a multiple of $kStoryTimerTickMillis and not less than 1000 milliseconds',
         );
 }
@@ -299,6 +295,8 @@ abstract class IWatchMarkable {
 
 abstract class IButtonPositionable {
   Offset? get centerPosition;
+
   Offset? get leftPosition;
+
   Offset? get rightPosition;
 }
