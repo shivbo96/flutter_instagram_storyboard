@@ -3,8 +3,6 @@ import 'package:flutter_instagram_storyboard/flutter_instagram_storyboard.dart';
 import 'package:flutter_instagram_storyboard/src/first_build_mixin.dart';
 import 'package:flutter_instagram_storyboard/src/set_state_after_frame_mixin.dart';
 
-import 'story_page_container_view.dart';
-
 class StoryPageContainerBuilder extends StatefulWidget {
   final Animation<double> animation;
   final StoryContainerSettings settings;
@@ -16,8 +14,7 @@ class StoryPageContainerBuilder extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StoryPageContainerBuilder> createState() =>
-      _StoryPageContainerBuilderState();
+  State<StoryPageContainerBuilder> createState() => _StoryPageContainerBuilderState();
 }
 
 class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
@@ -31,12 +28,10 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
   double _totalWidth = 0.0;
   double _pageWidth = 0.0;
   bool _isClosed = false;
-  int lateCurrentIndex = 0;
 
   @override
   void initState() {
-    _storyPageTransform =
-        widget.settings.pageTransform ?? const StoryPage3DTransform();
+    _storyPageTransform = widget.settings.pageTransform ?? const StoryPage3DTransform();
     _currentPage = widget.settings.allButtonDatas.indexOf(
       widget.settings.buttonData,
     );
@@ -46,11 +41,9 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page!.floor();
-        lateCurrentIndex = _curPageIndex;
         _pageDelta = _pageController.page! - _currentPage;
         final isFirst = _currentPage == 0;
-        final isLast =
-            _currentPage == widget.settings.allButtonDatas.length - 1;
+        final isLast = _currentPage == widget.settings.allButtonDatas.length - 1;
         if (isFirst) {
           final offset = _pageController.offset;
           if (offset < 0) {
@@ -97,8 +90,7 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
       final rightPos = _activeButtonData.buttonRightPosition?.dx;
       const additionalMargin = 12.0;
       if (leftPos != null && rightPos != null) {
-        final curScrollPosition =
-            widget.settings.storyListScrollController.position.pixels;
+        final curScrollPosition = widget.settings.storyListScrollController.position.pixels;
 
         if (leftPos < 0.0) {
           widget.settings.storyListScrollController.jumpTo(
@@ -195,27 +187,16 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
 
           return ClipRRect(
             clipper: _PageClipper(
-              borderRadius:
-                  widget.settings.buttonData.borderDecoration.borderRadius
-                      ?.resolve(
-                        null,
-                      )
-                      .bottomLeft,
-              startX: _activeButtonData.buttonCenterPosition?.dx ??
-                  widget.settings.tapPosition.dx,
-              startY: _activeButtonData.buttonCenterPosition?.dy ??
-                  widget.settings.tapPosition.dy,
+              borderRadius: widget.settings.buttonData.borderDecoration.borderRadius?.resolve(null).bottomLeft,
+              startX: _activeButtonData.buttonCenterPosition?.dx ?? widget.settings.tapPosition.dx,
+              startY: _activeButtonData.buttonCenterPosition?.dy ?? widget.settings.tapPosition.dy,
               animationValue: animationValue,
             ),
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: Container(
-                decoration: widget
-                    .settings.buttonData.containerBackgroundDecoration
-                    .copyWith(
-                  color: widget
-                      .settings.buttonData.containerBackgroundDecoration.color
-                      ?.withOpacity(
+                decoration: widget.settings.buttonData.containerBackgroundDecoration.copyWith(
+                  color: widget.settings.buttonData.containerBackgroundDecoration.color?.withOpacity(
                     bgOpacity,
                   ),
                 ),
@@ -227,13 +208,11 @@ class _StoryPageContainerBuilderState extends State<StoryPageContainerBuilder>
                     controller: _pageController,
                     itemBuilder: ((context, index) {
                       final childIndex = index % itemCount;
-                      final buttonData =
-                          widget.settings.allButtonDatas[childIndex];
+                      final buttonData = widget.settings.allButtonDatas[childIndex];
                       final child = StoryPageContainerView(
                         buttonData: buttonData,
                         onClosePressed: _close,
                         pageController: _pageController,
-                        currentIndex: lateCurrentIndex,
                         onStoryComplete: _onStoryComplete,
                       );
                       return _storyPageTransform.transform(

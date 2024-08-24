@@ -32,6 +32,7 @@ class StoryExamplePage extends StatefulWidget {
 
 class _StoryExamplePageState extends State<StoryExamplePage> {
   static const double _borderRadius = 100.0;
+  final StoryTimelineController storyController = StoryTimelineController();
 
   Widget _createDummyPage({
     required String text,
@@ -162,6 +163,22 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    storyController.addListener(
+      (event, storyId) {
+        print('event=> ${event}  storyId ${storyId}');
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    storyController.removeListener;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -175,9 +192,15 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
             pageTransform: const StoryPage3DTransform(),
             buttonDatas: [
               StoryButtonData(
+                storyId: "1",
+                storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),
                 child: _buildButtonChild('Want a new car?'),
+                // showAddButton: true,
+                onAddStoryPressed: () {
+                  print('onAddStoryPressed');
+                },
                 borderDecoration: _buildBorderDecoration(Colors.red),
                 storyPages: [
                   _createDummyPage(
@@ -192,6 +215,8 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 15), const Duration(seconds: 3)],
               ),
               StoryButtonData(
+                storyId: "2",
+                storyController: storyController,
                 timelineBackgroundColor: Colors.blue,
                 buttonDecoration: _buildButtonDecoration('travel_1'),
                 borderDecoration: _buildBorderDecoration(const Color.fromARGB(255, 134, 119, 95)),
@@ -220,6 +245,8 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 ],
               ),
               StoryButtonData(
+                storyId: "3",
+                storyController: storyController,
                 timelineBackgroundColor: Colors.orange,
                 borderDecoration: _buildBorderDecoration(Colors.orange),
                 buttonDecoration: _buildButtonDecoration('house'),
@@ -233,6 +260,8 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 5)],
               ),
               StoryButtonData(
+                storyId: "4",
+                storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),
                 child: _buildButtonChild('Want a new car?'),
@@ -247,9 +276,11 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                     imageName: 'car',
                   ),
                 ],
-                segmentDuration: [const Duration(seconds: 3)],
+                segmentDuration: [const Duration(seconds: 3), const Duration(seconds: 3)],
               ),
               StoryButtonData(
+                storyId: "5",
+                storyController: storyController,
                 buttonDecoration: _buildButtonDecoration('travel_1'),
                 borderDecoration: _buildBorderDecoration(const Color.fromARGB(255, 134, 119, 95)),
                 child: _buildButtonChild('Travel whereever'),
@@ -273,9 +304,10 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 3), const Duration(seconds: 3), const Duration(seconds: 3)],
               ),
               StoryButtonData(
-                // isVisibleCallback: () {
-                //   return false;
-                // },
+                storyId: "6",
+                isVisibleCallback: () {
+                  return false;
+                },
                 timelineBackgroundColor: Colors.orange,
                 borderDecoration: _buildBorderDecoration(Colors.orange),
                 buttonDecoration: _buildButtonDecoration('house'),
