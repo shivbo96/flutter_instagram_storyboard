@@ -260,6 +260,7 @@ class StoryButtonData {
   final bool showMoreOptionInBottomSheet;
   final bool showStoryViewedUsersIcon;
   final VoidCallback? moreOptionInBottomSheetCallBack;
+  final VoidCallback? onStorySeenUsersIconPressedCallback;
 
   /// Usualy this is required for the final story
   /// to pop it out to its button mosition
@@ -296,6 +297,7 @@ class StoryButtonData {
     this.inkFeatureFactory,
     this.showAddButton = false,
     this.moreOptionInBottomSheetCallBack,
+    this.onStorySeenUsersIconPressedCallback,
     this.showMoreOptionInBottomSheet = false,
     this.showStoryViewedUsersIcon = false,
     this.pageAnimationCurve,

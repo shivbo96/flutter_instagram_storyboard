@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_storyboard/flutter_instagram_storyboard.dart';
@@ -109,6 +109,7 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
               onTap: () {
                 _pointerDownMillis = _stopwatch.elapsedMilliseconds;
                 _storyController.pause();
+                widget.buttonData.onStorySeenUsersIconPressedCallback?.call();
                 onStorySeenUsersIconCountPressed();
               },
               child: Padding(
@@ -211,12 +212,26 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
                     itemBuilder: (context, index) {
                       final user = users[index];
                       return ListTile(
-                        leading: Icon(CupertinoIcons.profile_circled, size: 55),
+                        leading: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(shape: BoxShape.circle),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: CachedNetworkImage(
+                              imageUrl: '${user.profile}',
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.person_2_outlined, size: 30, color: Colors.white),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                         title: Row(
                           children: [
                             Text(
                               user.title,
                               style: TextStyle(
+                                fontSize: 12,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -233,6 +248,7 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
                         subtitle: Text(
                           user.subtitle,
                           style: TextStyle(
+                            fontSize: 12,
                             color: Colors.grey,
                           ),
                         ),
@@ -370,6 +386,8 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
 enum StoryTimelineEvent {
   storyComplete,
   segmentComplete,
+  segmentPause,
+  segmentResume,
 }
 
 typedef StoryTimelineCallback = Function(StoryTimelineEvent, String);

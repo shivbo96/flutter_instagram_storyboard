@@ -199,6 +199,9 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 moreOptionInBottomSheetCallBack: () {
                   print('moreOptionInBottomSheetCallBack');
                 },
+                onStorySeenUsersIconPressedCallback: () {
+                  print('onStorySeenUsersIconPressedCallback');
+                },
                 storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),
@@ -219,16 +222,14 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 ],
                 storyViewedUserList: [
                   [
+                    ReadUserModel(profile: 'John', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
                     ReadUserModel(
-                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                        profile: 'Jane', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
                     ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
-                    ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                        profile: 'Jane', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
                   ],
                   [
-                    ReadUserModel(
-                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                    ReadUserModel(profile: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
                   ]
                 ],
                 segmentDuration: [const Duration(seconds: 15), const Duration(seconds: 3)],
@@ -238,21 +239,18 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 storyController: storyController,
                 storyViewedUserList: [
                   [
+                    ReadUserModel(profile: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
                     ReadUserModel(
-                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
-                    ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                        profile: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
                   ],
                   [],
                   [
+                    ReadUserModel(profile: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
                     ReadUserModel(
-                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                        profile: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                    ReadUserModel(profile: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
                     ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
-                    ReadUserModel(
-                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
-                    ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false)
+                        profile: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false)
                   ]
                 ],
                 timelineBackgroundColor: Colors.blue,

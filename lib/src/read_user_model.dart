@@ -1,11 +1,11 @@
 class ReadUserModel {
-  final String userName;
+  final String profile;
   final String title;
   final String subtitle;
   final bool showBadge;
 
   ReadUserModel({
-    required this.userName,
+    required this.profile,
     required this.title,
     required this.subtitle,
     required this.showBadge,
@@ -14,7 +14,7 @@ class ReadUserModel {
   // Convert a ReadUserModel to a Map.
   Map<String, dynamic> toMap() {
     return {
-      'userName': userName,
+      'profile': profile,
       'title': title,
       'subtitle': subtitle,
       'showBadge': showBadge,
@@ -24,7 +24,7 @@ class ReadUserModel {
   // Convert a Map to a ReadUserModel.
   factory ReadUserModel.fromMap(Map<String, dynamic> map) {
     return ReadUserModel(
-      userName: map['userName'] ?? '',
+      profile: map['profile'] ?? '',
       title: map['title'] ?? '',
       subtitle: map['subtitle'] ?? '',
       showBadge: map['showBadge'] ?? false,
@@ -34,7 +34,7 @@ class ReadUserModel {
   // If you're dealing with JSON, you might want to add these:
   factory ReadUserModel.fromJson(Map<String, dynamic> json) {
     return ReadUserModel(
-      userName: json['userName'],
+      profile: json['profile'],
       title: json['title'],
       subtitle: json['subtitle'],
       showBadge: json['showBadge'] ?? false,
@@ -43,7 +43,7 @@ class ReadUserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'userName': userName,
+      'profile': profile,
       'title': title,
       'subtitle': subtitle,
       'showBadge': showBadge,
