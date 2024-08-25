@@ -169,10 +169,10 @@ class _StoryButtonState extends State<StoryButton>
                                 child: DashedCircle(
                                   child: Container(
                                     decoration: BoxDecoration(shape: BoxShape.circle),
-                                    padding: EdgeInsets.all(3.0),
+                                    padding: widget.buttonData.addStoryButtonPadding ?? EdgeInsets.all(3.0),
                                     child: Icon(
                                       Icons.add,
-                                      size: 25,
+                                      size: widget.buttonData.addStoryButtonSize ?? 24,
                                       color: Color(0xFF4D5761),
                                     ),
                                   ),
@@ -252,6 +252,8 @@ class StoryButtonData {
   final EdgeInsets? timlinePadding;
   final IsVisibleCallback isVisibleCallback;
   final onAddStoryPressedCallback? onAddStoryPressed;
+  final double? addStoryButtonSize;
+  final EdgeInsetsGeometry? addStoryButtonPadding;
   final bool showAddButton;
 
   /// Usualy this is required for the final story
@@ -290,6 +292,8 @@ class StoryButtonData {
     this.showAddButton = false,
     this.pageAnimationCurve,
     this.splashColor,
+    this.addStoryButtonSize,
+    this.addStoryButtonPadding,
     this.addStoryWidget,
     this.isVisibleCallback = defaultIsVisibleCallback,
     this.onAddStoryPressed,
