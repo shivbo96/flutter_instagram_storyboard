@@ -164,8 +164,7 @@ class _StoryButtonState extends State<StoryButton>
                           Positioned(
                               bottom: 0,
                               right: 0,
-                              child: InkWell(
-                                splashFactory: widget.buttonData.inkFeatureFactory ?? InkRipple.splashFactory,
+                              child: GestureDetector(
                                 onTap: widget.buttonData.onAddStoryPressed,
                                 child: DashedCircle(
                                   child: Container(
