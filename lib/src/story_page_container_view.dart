@@ -492,8 +492,8 @@ class _StoryTimelineState extends State<StoryTimeline> {
     if (widget.buttonData.storyWatchedContract == StoryWatchedContract.onStoryEnd) {
       widget.buttonData.markAsWatched();
     }
-    widget.buttonData.currentSegmentIndex = 0;
     widget.controller._onStoryComplete("${widget.buttonData.storyId}-${widget.buttonData.currentSegmentIndex}");
+    widget.buttonData.currentSegmentIndex = 0;
   }
 
   void _onSegmentComplete() {
@@ -529,8 +529,8 @@ class _StoryTimelineState extends State<StoryTimeline> {
   void nextSegment() {
     if (_isLastSegment) {
       _accumulatedTime = _maxAccumulator;
-      widget.buttonData.currentSegmentIndex = 0;
       widget.controller._onStoryComplete("${widget.buttonData.storyId}-${widget.buttonData.currentSegmentIndex}");
+      widget.buttonData.currentSegmentIndex = 0;
     } else {
       _accumulatedTime = 0;
       _onSegmentComplete();
