@@ -196,12 +196,13 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 showAddButton: true,
                 showMoreOptionInBottomSheet: true,
                 showStoryViewedUsersIcon: true,
-                moreOptionInBottomSheetCallBack: () {},
+                moreOptionInBottomSheetCallBack: () {
+                  print('moreOptionInBottomSheetCallBack');
+                },
                 storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),
                 child: _buildButtonChild('Want a new car?'),
-                // showAddButton: true,
                 onAddStoryPressed: () {
                   print('onAddStoryPressed');
                 },
