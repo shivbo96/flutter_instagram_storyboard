@@ -193,6 +193,7 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
             buttonDatas: [
               StoryButtonData(
                 storyId: "1",
+                showAddButton: true,
                 storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),

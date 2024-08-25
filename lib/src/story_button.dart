@@ -158,32 +158,28 @@ class _StoryButtonState extends State<StoryButton>
                       ],
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: widget.buttonData.showAddButton
-                        ? InkWell(
-                            splashFactory: widget.buttonData.inkFeatureFactory ?? InkRipple.splashFactory,
-                            onTap: widget.buttonData.onAddStoryPressed,
-                            child: widget.buttonData.addStoryWidget ??
-                                DashedCircle(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(6.0),
-                                    child: CircleAvatar(
-                                      radius: 10.0,
-                                      backgroundColor: Colors.transparent,
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 25,
-                                        color: Color(0xFF4D5761),
-                                      ),
+                  widget.buttonData.showAddButton
+                      ? widget.buttonData.addStoryWidget ??
+                          Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: InkWell(
+                                splashFactory: widget.buttonData.inkFeatureFactory ?? InkRipple.splashFactory,
+                                onTap: widget.buttonData.onAddStoryPressed,
+                                child: DashedCircle(
+                                  child: Container(
+                                    decoration: BoxDecoration(shape: BoxShape.circle),
+                                    padding: EdgeInsets.all(3.0),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 25,
+                                      color: Color(0xFF4D5761),
                                     ),
                                   ),
                                   color: Color(0xFF4D5761),
                                 ),
-                          )
-                        : SizedBox.shrink(),
-                  )
+                              ))
+                      : SizedBox.shrink(),
                 ],
               ),
             ),
@@ -244,7 +240,7 @@ class StoryButtonData {
   final Widget child;
   final List<Widget> storyPages;
   final Widget? closeButton;
-  final Widget? addStoryWidget;
+  final Positioned? addStoryWidget;
   final List<Duration> segmentDuration;
   final BoxDecoration containerBackgroundDecoration;
   final Color timelineFillColor;
