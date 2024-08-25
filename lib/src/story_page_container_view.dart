@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_storyboard/flutter_instagram_storyboard.dart';
@@ -81,9 +82,7 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
             }
           },
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              40.0,
-            ),
+            borderRadius: BorderRadius.circular(40.0),
           ),
           child: SizedBox(
             height: 40.0,
@@ -105,7 +104,154 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
       child: Row(
         children: [
           const Expanded(child: SizedBox()),
+          if (widget.buttonData.showStoryViewedUsersIcon)
+            InkWell(
+              onTap: () {
+                _pointerDownMillis = _stopwatch.elapsedMilliseconds;
+                _storyController.pause();
+                onStorySeenUsersIconCountPressed();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Container(
+                    decoration:
+                        BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
+                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    child: Row(
+                      children: [
+                        Icon(Icons.remove_red_eye_rounded, color: Colors.white, size: 20),
+                        if ((widget.buttonData.storyViewedUserList?[widget.buttonData.currentSegmentIndex] ?? [])
+                            .isNotEmpty)
+                          SizedBox(width: 5),
+                        if ((widget.buttonData.storyViewedUserList?[widget.buttonData.currentSegmentIndex] ?? [])
+                            .isNotEmpty)
+                          Text(
+                              '${(widget.buttonData.storyViewedUserList?[widget.buttonData.currentSegmentIndex] ?? []).length}',
+                              style: TextStyle(fontSize: 13, color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ]),
+              ),
+            ),
           closeButton,
+        ],
+      ),
+    );
+  }
+
+  void onStorySeenUsersIconCountPressed() {
+    _pointerDownMillis = _stopwatch.elapsedMilliseconds;
+    _storyController.pause();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.horizontal(left: Radius.circular(16), right: Radius.circular(16))),
+      builder: (BuildContext context) {
+        return _buildBottomSheet(
+            context, widget.buttonData.storyViewedUserList?[widget.buttonData.currentSegmentIndex] ?? []);
+      },
+    ).then(
+      (value) {
+        _storyController.unpause();
+      },
+    );
+  }
+
+  Widget _buildBottomSheet(BuildContext context, List<ReadUserModel> users) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            width: 40.0,
+            height: 4.0,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(2.0),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Views (${users.length})',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (widget.buttonData.showMoreOptionInBottomSheet)
+                  IconButton(
+                    icon: Icon(
+                      Icons.more_vert_rounded,
+                      color: Colors.white,
+                    ),
+                    onPressed: widget.buttonData.moreOptionInBottomSheetCallBack,
+                  )
+              ],
+            ),
+          ),
+          Expanded(
+            child: users.isNotEmpty
+                ? ListView.builder(
+                    itemCount: users.length,
+                    itemBuilder: (context, index) {
+                      final user = users[index];
+                      return ListTile(
+                        leading: Icon(CupertinoIcons.profile_circled, size: 55),
+                        title: Row(
+                          children: [
+                            Text(
+                              user.title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            if (user.showBadge)
+                              Icon(
+                                Icons.check_circle,
+                                color: Colors.blue,
+                                size: 16.0,
+                              ),
+                          ],
+                        ),
+                        subtitle: Text(
+                          user.subtitle,
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'No view yet',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                  ),
+          ),
         ],
       ),
     );
@@ -152,12 +298,20 @@ class _StoryPageContainerViewState extends State<StoryPageContainerView> with Fi
 
   Widget _buildPageStructure() {
     return Listener(
+      key: UniqueKey(),
       onPointerDown: (PointerDownEvent event) {
         _pointerDownMillis = _stopwatch.elapsedMilliseconds;
         _pointerDownPosition = event.position;
         _storyController.pause();
       },
       onPointerUp: (PointerUpEvent event) {
+        if (event.localPosition.dy > 36 && event.localPosition.dy < 83) {
+          _pointerDownMillis = _stopwatch.elapsedMilliseconds;
+          _storyController.pause();
+          return;
+        } else {
+          _storyController.unpause();
+        }
         final pointerUpMillis = _stopwatch.elapsedMilliseconds;
         final maxPressMillis = kPressTimeout.inMilliseconds * 2;
         final diffMillis = pointerUpMillis - _pointerDownMillis;

@@ -194,6 +194,9 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
               StoryButtonData(
                 storyId: "1",
                 showAddButton: true,
+                showMoreOptionInBottomSheet: true,
+                showStoryViewedUsersIcon: true,
+                moreOptionInBottomSheetCallBack: () {},
                 storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),
@@ -218,6 +221,25 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
               StoryButtonData(
                 storyId: "2",
                 storyController: storyController,
+                storyViewedUserList: [
+                  [
+                    ReadUserModel(
+                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                  ],
+                  [],
+                  [
+                    ReadUserModel(
+                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                    ReadUserModel(
+                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false)
+                  ]
+                ],
                 timelineBackgroundColor: Colors.blue,
                 buttonDecoration: _buildButtonDecoration('travel_1'),
                 borderDecoration: _buildBorderDecoration(const Color.fromARGB(255, 134, 119, 95)),
@@ -318,6 +340,16 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                     text: 'You cannot buy a house. Live with it',
                     imageName: 'house',
                   ),
+                ],
+                storyViewedUserList: [
+                  [
+                    ReadUserModel(
+                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                  ]
                 ],
                 segmentDuration: [
                   const Duration(seconds: 5),

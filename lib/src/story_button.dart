@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_storyboard/src/read_user_model.dart';
 import 'package:flutter_instagram_storyboard/src/set_state_after_frame_mixin.dart';
 import 'package:flutter_instagram_storyboard/src/story_page_transform.dart';
 
@@ -243,6 +244,7 @@ class StoryButtonData {
   final Widget? closeButton;
   final Positioned? addStoryWidget;
   final List<Duration> segmentDuration;
+  final List<List<ReadUserModel>>? storyViewedUserList;
   final BoxDecoration containerBackgroundDecoration;
   final Color timelineFillColor;
   final Color timelineBackgroundColor;
@@ -255,6 +257,9 @@ class StoryButtonData {
   final double? addStoryButtonSize;
   final EdgeInsetsGeometry? addStoryButtonPadding;
   final bool showAddButton;
+  final bool showMoreOptionInBottomSheet;
+  final bool showStoryViewedUsersIcon;
+  final VoidCallback? moreOptionInBottomSheetCallBack;
 
   /// Usualy this is required for the final story
   /// to pop it out to its button mosition
@@ -290,10 +295,14 @@ class StoryButtonData {
     this.timlinePadding,
     this.inkFeatureFactory,
     this.showAddButton = false,
+    this.moreOptionInBottomSheetCallBack,
+    this.showMoreOptionInBottomSheet = false,
+    this.showStoryViewedUsersIcon = false,
     this.pageAnimationCurve,
     this.splashColor,
     this.addStoryButtonSize,
     this.addStoryButtonPadding,
+    this.storyViewedUserList,
     this.addStoryWidget,
     this.isVisibleCallback = defaultIsVisibleCallback,
     this.onAddStoryPressed,
