@@ -146,6 +146,7 @@ class _StoryButtonState extends State<StoryButton>
                         Material(
                           color: Colors.transparent,
                           child: InkWell(
+                            splashColor: widget.buttonData.splashColor,
                             splashFactory: widget.buttonData.inkFeatureFactory ?? InkRipple.splashFactory,
                             onTap: widget.buttonData.showAddButton ? widget.buttonData.onAddStoryPressed : _onTap,
                             onLongPress: !widget.buttonData.showAddButton ? null : _onTap,
@@ -237,6 +238,7 @@ class StoryButtonData {
   final double borderOffset;
   final String storyId;
   final InteractiveInkFeatureFactory? inkFeatureFactory;
+  final Color? splashColor;
   final Widget child;
   final List<Widget> storyPages;
   final Widget? closeButton;
@@ -288,6 +290,7 @@ class StoryButtonData {
     this.inkFeatureFactory,
     this.showAddButton = false,
     this.pageAnimationCurve,
+    this.splashColor,
     this.addStoryWidget,
     this.isVisibleCallback = defaultIsVisibleCallback,
     this.onAddStoryPressed,
