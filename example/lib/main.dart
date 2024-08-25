@@ -216,6 +216,20 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                     imageName: 'car',
                   ),
                 ],
+                storyViewedUserList: [
+                  [
+                    ReadUserModel(
+                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                    ReadUserModel(
+                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                  ],
+                  [
+                    ReadUserModel(
+                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
+                  ]
+                ],
                 segmentDuration: [const Duration(seconds: 15), const Duration(seconds: 3)],
               ),
               StoryButtonData(
@@ -340,16 +354,6 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                     text: 'You cannot buy a house. Live with it',
                     imageName: 'house',
                   ),
-                ],
-                storyViewedUserList: [
-                  [
-                    ReadUserModel(
-                        userName: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
-                    ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
-                    ReadUserModel(
-                        userName: 'Jane Doe', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
-                  ]
                 ],
                 segmentDuration: [
                   const Duration(seconds: 5),
