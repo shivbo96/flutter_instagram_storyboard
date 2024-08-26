@@ -236,7 +236,7 @@ class StoryButtonData {
   final BoxDecoration buttonDecoration;
   final BoxDecoration borderDecoration;
   final double borderOffset;
-  final String storyId;
+  final List<String>? storyIds;
   final InteractiveInkFeatureFactory? inkFeatureFactory;
   final Color? splashColor;
   final Widget child;
@@ -315,7 +315,7 @@ class StoryButtonData {
     this.closeButton,
     required this.storyPages,
     required this.child,
-    required this.storyId,
+    this.storyIds,
     required this.segmentDuration,
     this.containerBackgroundDecoration = const BoxDecoration(
       color: Color.fromARGB(255, 0, 0, 0),

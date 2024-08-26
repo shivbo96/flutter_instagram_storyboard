@@ -192,7 +192,7 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
             pageTransform: const StoryPage3DTransform(),
             buttonDatas: [
               StoryButtonData(
-                storyId: "1",
+                storyIds: ["a", "b"],
                 showAddButton: true,
                 showMoreOptionInBottomSheet: true,
                 showStoryViewedUsersIcon: true,
@@ -223,10 +223,8 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 storyViewedUserList: [
                   [
                     ReadUserModel(profile: 'John', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
-                    ReadUserModel(
-                        profile: 'Jane', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
-                    ReadUserModel(
-                        profile: 'Jane', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                    ReadUserModel(profile: 'Jane', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
+                    ReadUserModel(profile: 'Jane', title: 'Stage Name', subtitle: 'Another subtitle', showBadge: false),
                   ],
                   [
                     ReadUserModel(profile: 'John Doe', title: 'Stage Name', subtitle: 'Some subtitle', showBadge: true),
@@ -235,7 +233,7 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 15), const Duration(seconds: 3)],
               ),
               StoryButtonData(
-                storyId: "2",
+                storyIds: ["a", "b", 'c'],
                 storyController: storyController,
                 storyViewedUserList: [
                   [
@@ -281,7 +279,7 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 ],
               ),
               StoryButtonData(
-                storyId: "3",
+                storyIds: ["a"],
                 storyController: storyController,
                 timelineBackgroundColor: Colors.orange,
                 borderDecoration: _buildBorderDecoration(Colors.orange),
@@ -296,7 +294,6 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 5)],
               ),
               StoryButtonData(
-                storyId: "4",
                 storyController: storyController,
                 timelineBackgroundColor: Colors.red,
                 buttonDecoration: _buildButtonDecoration('car'),
@@ -315,7 +312,6 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 3), const Duration(seconds: 3)],
               ),
               StoryButtonData(
-                storyId: "5",
                 storyController: storyController,
                 buttonDecoration: _buildButtonDecoration('travel_1'),
                 borderDecoration: _buildBorderDecoration(const Color.fromARGB(255, 134, 119, 95)),
@@ -340,7 +336,6 @@ class _StoryExamplePageState extends State<StoryExamplePage> {
                 segmentDuration: [const Duration(seconds: 3), const Duration(seconds: 3), const Duration(seconds: 3)],
               ),
               StoryButtonData(
-                storyId: "6",
                 isVisibleCallback: () {
                   return false;
                 },

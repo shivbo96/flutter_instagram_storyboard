@@ -510,7 +510,7 @@ class _StoryTimelineState extends State<StoryTimeline> {
     if (widget.buttonData.storyWatchedContract == StoryWatchedContract.onStoryEnd) {
       widget.buttonData.markAsWatched();
     }
-    widget.controller._onStoryComplete("${widget.buttonData.storyId}-${widget.buttonData.currentSegmentIndex}");
+    widget.controller._onStoryComplete("${widget.buttonData.storyIds?[widget.buttonData.currentSegmentIndex] ?? ''}");
     widget.buttonData.currentSegmentIndex = 0;
   }
 
@@ -518,7 +518,7 @@ class _StoryTimelineState extends State<StoryTimeline> {
     if (widget.buttonData.storyWatchedContract == StoryWatchedContract.onSegmentEnd) {
       widget.buttonData.markAsWatched();
     }
-    widget.controller._onSegmentComplete("${widget.buttonData.storyId}-${widget.buttonData.currentSegmentIndex}");
+    widget.controller._onSegmentComplete("${widget.buttonData.storyIds?[widget.buttonData.currentSegmentIndex] ?? ''}");
   }
 
   bool get _isLastSegment {
@@ -547,7 +547,7 @@ class _StoryTimelineState extends State<StoryTimeline> {
   void nextSegment() {
     if (_isLastSegment) {
       _accumulatedTime = _maxAccumulator;
-      widget.controller._onStoryComplete("${widget.buttonData.storyId}-${widget.buttonData.currentSegmentIndex}");
+      widget.controller._onStoryComplete("${widget.buttonData.storyIds?[widget.buttonData.currentSegmentIndex] ?? ''}");
       widget.buttonData.currentSegmentIndex = 0;
     } else {
       _accumulatedTime = 0;
