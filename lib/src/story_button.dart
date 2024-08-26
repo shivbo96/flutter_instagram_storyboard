@@ -174,10 +174,10 @@ class _StoryButtonState extends State<StoryButton>
                                     child: Icon(
                                       Icons.add,
                                       size: widget.buttonData.addStoryButtonSize ?? 24,
-                                      color: Color(0xFF4D5761),
+                                      color: widget.buttonData.addButtonColor ?? Color(0xFF4D5761),
                                     ),
                                   ),
-                                  color: Color(0xFF4D5761),
+                                  color: widget.buttonData.addButtonColor ?? Color(0xFF4D5761),
                                 ),
                               ))
                       : SizedBox.shrink(),
@@ -249,6 +249,7 @@ class StoryButtonData {
   final Color timelineFillColor;
   final Color timelineBackgroundColor;
   final Color defaultCloseButtonColor;
+  final Color? addButtonColor;
   final double timelineThikness;
   final double timelineSpacing;
   final EdgeInsets? timlinePadding;
@@ -311,6 +312,7 @@ class StoryButtonData {
     this.pageAnimationDuration,
     this.timelineFillColor = Colors.white,
     this.defaultCloseButtonColor = Colors.white,
+    this.addButtonColor,
     this.timelineBackgroundColor = const Color.fromARGB(255, 200, 200, 200),
     this.closeButton,
     required this.storyPages,
